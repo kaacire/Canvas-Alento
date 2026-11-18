@@ -1,0 +1,13 @@
+/* Preto ou branco / monocromático (usar prefers-color-scheme ou escolha do usuário depois) */
+:root[data-theme="monochrome"] {
+  --bg: #ffffff;
+  --surface: #f2f2f2;
+  --text: #111111;
+  --accent: #000000;
+  --accent-soft: #8a8a8a;
+  --border: #111111;
+  --border-width: 1px;
+  --radius: 2px;
+  --font-title: "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Helvetica Neue", Arial, sans-serif;
+}

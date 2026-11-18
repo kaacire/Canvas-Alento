@@ -1,0 +1,810 @@
+Conceito da Plataforma de Experiências Interativas
+
+«Documento de conceito — não é um PRD.
+
+Este documento registra as decisões tomadas durante a concepção da segunda versão do projeto. Ele não define ainda a arquitetura técnica definitiva, requisitos completos ou plano de desenvolvimento.»
+
+---
+
+1. Visão geral
+
+A plataforma consiste em um produto de entretenimento digital no qual usuários podem criar, personalizar e compartilhar experiências interativas com outras pessoas.
+
+O conceito se aproxima do modelo do Picrew principalmente pela lógica de criação e reutilização:
+
+- alguém cria um modelo;
+- outras pessoas utilizam esse modelo;
+- cada pessoa cria uma versão própria;
+- a versão criada pode ser compartilhada;
+- futuramente, usuários também podem criar modelos para outras pessoas utilizarem.
+
+A diferença principal é que, em vez de estar centrada apenas na criação de imagens, a plataforma será voltada para experiências interativas.
+
+O foco principal do produto é a criação, e não o consumo de experiências publicadas.
+
+---
+
+2. Objetivo do produto
+
+A plataforma tem como objetivo oferecer uma forma simples de criar experiências digitais para:
+
+- entretenimento;
+- interação entre amigos;
+- compartilhamento;
+- expressão criativa;
+- criação de experiências personalizadas.
+
+A criação não será limitada a um único propósito. Uma mesma categoria poderá ser utilizada em diferentes contextos.
+
+Exemplos:
+
+- um quiz pode ser romântico;
+- um quiz pode ser educativo;
+- um quiz pode ser recreativo;
+- um desafio pode ser individual ou compartilhado entre amigos.
+
+---
+
+3. Categorias iniciais
+
+A segunda versão trabalhará inicialmente com quatro categorias:
+
+1. Cartinhas de relacionamento
+2. Desafios
+3. Flashcards
+4. Quiz
+
+Cada categoria terá inicialmente 3 templates, totalizando 12 templates iniciais.
+
+A intenção dessa segunda versão é observar como esses templates se comportam dentro da plataforma antes de ampliar o sistema.
+
+---
+
+4. Templates
+
+Os templates são estruturas prontas utilizadas como ponto de partida para a criação de uma experiência.
+
+Existirão dois tipos principais:
+
+4.1. Templates da plataforma
+
+São modelos criados pela própria plataforma e disponibilizados para os usuários.
+
+4.2. Templates da comunidade
+
+Usuários também poderão criar seus próprios templates e disponibilizá-los para outras pessoas.
+
+Isso permite que o catálogo da plataforma cresça não apenas através da equipe responsável pelo produto, mas também através dos próprios usuários.
+
+---
+
+5. Cópias independentes
+
+Quando um usuário utiliza um template, ele não modifica o template original.
+
+O sistema deverá criar uma cópia independente para aquele usuário.
+
+Template original
+       │
+       ├── Cópia do usuário A
+       ├── Cópia do usuário B
+       └── Cópia do usuário C
+
+Cada cópia poderá ser personalizada independentemente.
+
+Alterações feitas em uma cópia não deverão afetar:
+
+- o template original;
+- outras cópias;
+- experiências criadas por outros usuários.
+
+Essa regra também protege o trabalho dos criadores de templates.
+
+---
+
+6. Personalização
+
+A primeira versão do sistema de personalização será deliberadamente controlada.
+
+O usuário poderá personalizar principalmente:
+
+- textos;
+- imagens;
+- minigames;
+- música;
+- tema visual;
+- elementos permitidos pelo template.
+
+A plataforma não pretende inicialmente oferecer liberdade total de composição.
+
+Não faz parte da proposta inicial permitir:
+
+- CSS livre;
+- JavaScript livre;
+- alteração completa da estrutura visual;
+- criação livre de componentes;
+- edição irrestrita das animações internas.
+
+A ideia é permitir liberdade de conteúdo sem abandonar a estrutura do template.
+
+---
+
+7. Temas visuais
+
+A plataforma terá inicialmente quatro estilos visuais:
+
+1. Diário romântico
+2. Preto ou branco / monocromático
+3. Rabisco
+4. Moderno com cores pastel
+
+O tema deverá ser tratado separadamente do conteúdo.
+
+Isso significa que uma experiência poderá, conceitualmente, trocar de tema sem precisar reconstruir seu conteúdo.
+
+---
+
+8. Minigames
+
+Minigames serão recursos reutilizáveis dentro da plataforma.
+
+Uma experiência poderá:
+
+- possuir minigames;
+- não possuir nenhum minigame;
+- utilizar diferentes minigames;
+- adicionar ou remover minigames conforme o template permitir.
+
+Além disso, os minigames deverão existir como recursos independentes.
+
+Um usuário poderá criar ou salvar um minigame e utilizá-lo posteriormente em outra experiência.
+
+Exemplos de minigames possíveis:
+
+- labirinto;
+- quebra-cabeça;
+- memória;
+- código secreto;
+- sequência;
+- associação;
+- palavra oculta;
+- enigma;
+- arrastar e soltar;
+- encontre as diferenças.
+
+A biblioteca de minigames deverá ser compartilhável entre as categorias.
+
+---
+
+9. Criação de experiências
+
+Fluxo conceitual:
+
+Escolher categoria
+       ↓
+Escolher template
+       ↓
+Criar uma cópia
+       ↓
+Personalizar
+       ↓
+Adicionar minigames (opcional)
+       ↓
+Escolher tema e música
+       ↓
+Visualizar
+       ↓
+Salvar
+       ↓
+Compartilhar ou publicar
+
+A experiência poderá permanecer privada enquanto estiver sendo criada.
+
+---
+
+10. Biblioteca pessoal
+
+Cada usuário terá uma biblioteca para suas próprias criações.
+
+A biblioteca deverá permitir organizar pelo menos:
+
+- experiências;
+- rascunhos;
+- minigames salvos;
+- arquivos pessoais, quando disponíveis no plano.
+
+A quantidade de experiências criadas não será limitada artificialmente por plano.
+
+A criação e o compartilhamento são considerados funcionalidades fundamentais da plataforma.
+
+---
+
+11. Compartilhamento
+
+Uma experiência poderá ser compartilhada com outras pessoas através de um link.
+
+O criador poderá definir se a experiência exige autenticação para ser acessada.
+
+Acesso livre
+
+Qualquer pessoa com o link poderá abrir e interagir com a experiência sem criar ou entrar em uma conta.
+
+Acesso com login
+
+O criador poderá exigir que o participante esteja autenticado na plataforma para acessar a experiência.
+
+Apesar dessa possibilidade, a expectativa é que experiências de entretenimento compartilhadas entre amigos utilizem predominantemente o acesso livre.
+
+---
+
+12. Privacidade
+
+Experiências serão privadas por padrão.
+
+Criar uma experiência não deverá publicá-la automaticamente na comunidade.
+
+Fluxo conceitual:
+
+Criar experiência
+       ↓
+Salvar
+       ↓
+Privada
+       ↓
+Criador decide quando compartilhar/publicar
+
+O compartilhamento por link e a publicação na comunidade poderão ser tratados como conceitos diferentes.
+
+---
+
+13. Progresso das experiências
+
+O progresso será salvo automaticamente.
+
+Se uma experiência possuir várias etapas e o participante sair no meio, deverá poder continuar posteriormente de onde parou.
+
+Regras conceituais:
+
+- salvamento automático;
+- retomada da última etapa;
+- nenhuma ação manual necessária para salvar;
+- possibilidade de reiniciar a experiência.
+
+Para participantes sem conta, o progresso poderá futuramente depender de armazenamento no navegador. Limpar os dados do navegador poderá afetar esse progresso.
+
+---
+
+14. Resultados e respostas
+
+As respostas e resultados pertencem ao participante.
+
+O criador da experiência não terá acesso às respostas individuais dos participantes.
+
+Isso significa que:
+
+- o criador não terá um painel de respostas;
+- o participante poderá visualizar seus próprios resultados;
+- as respostas não serão enviadas automaticamente ao criador.
+
+Essa decisão também reduz a necessidade de criar inicialmente sistemas de coleta e análise de respostas.
+
+---
+
+15. Edição colaborativa
+
+As experiências poderão ser editadas colaborativamente.
+
+O proprietário poderá convidar outros usuários para trabalhar na mesma criação.
+
+A colaboração será configurável.
+
+Edição completa
+
+O colaborador poderá modificar todos os elementos que normalmente podem ser editados naquela criação.
+
+Edição limitada
+
+O proprietário poderá restringir quais partes da criação o colaborador pode alterar.
+
+As permissões poderão futuramente separar ações como:
+
+- editar;
+- publicar;
+- excluir;
+- administrar colaboradores;
+- transferir propriedade.
+
+---
+
+16. Descoberta da comunidade
+
+A plataforma terá duas formas principais de descoberta.
+
+16.1. Galeria de templates
+
+Voltada para quem deseja criar.
+
+Poderá apresentar:
+
+- templates oficiais;
+- templates da comunidade;
+- categorias;
+- filtros;
+- pré-visualizações;
+- modelos em destaque;
+- opção de utilizar um template.
+
+16.2. Feed da comunidade
+
+Voltado para descoberta de experiências publicadas.
+
+Poderá apresentar:
+
+- experiências de outros usuários;
+- criações em destaque;
+- experiências recentes;
+- experiências populares;
+- acesso à experiência;
+- acesso ao template de origem, quando disponibilizado.
+
+Uma experiência publicada não precisa necessariamente ser um template.
+
+---
+
+17. Recursos sociais
+
+A plataforma terá recursos sociais, mas não pretende funcionar como uma rede social tradicional.
+
+Terá
+
+- seguir criadores;
+- curtir experiências/templates;
+- favoritar experiências/templates.
+
+Não terá inicialmente
+
+- comentários;
+- mensagens privadas;
+- chat;
+- interação direta entre usuários.
+
+Diferença entre os recursos
+
+Curtir
+
+Demonstra interesse em uma publicação.
+
+Favoritar
+
+Salva uma experiência ou template na coleção pessoal.
+
+Seguir
+
+Permite acompanhar um criador e suas novas publicações.
+
+---
+
+18. Templates pagos
+
+Templates criados pela comunidade poderão ser disponibilizados de duas formas:
+
+- gratuitos;
+- pagos.
+
+O objetivo é permitir que criadores possam comercializar o trabalho criativo desenvolvido por eles.
+
+A compra de um template não representa transferência de propriedade.
+
+---
+
+19. Licença de templates comprados
+
+O modelo padrão será de licença de uso.
+
+Ao comprar um template, o usuário poderá:
+
+- criar cópias;
+- personalizar suas cópias;
+- utilizar as experiências resultantes;
+- compartilhar suas experiências.
+
+O comprador não poderá, por padrão:
+
+- redistribuir o template original;
+- revender o template;
+- publicar o template como se fosse seu;
+- transformar a cópia em um novo template comercial sem autorização.
+
+O criador original continua sendo o proprietário do template.
+
+---
+
+20. Monetização
+
+A plataforma terá duas fontes principais de monetização:
+
+1. Assinatura mensal
+2. Comissão sobre vendas de templates
+
+A assinatura não deverá cobrar pela simples capacidade de criar ou compartilhar experiências.
+
+«A criação e o compartilhamento são funcionalidades fundamentais. O pagamento está principalmente relacionado à personalização e aos recursos adicionais.»
+
+Os preços e porcentagens ainda não foram definidos.
+
+---
+
+21. Modelo gratuito e Premium
+
+Funcionalidade| Gratuito| Premium
+Criar experiências| Sim| Sim
+Salvar experiências| Sim| Sim
+Compartilhar por link| Sim| Sim
+Publicar na comunidade| Sim| Sim
+Utilizar templates gratuitos| Sim| Sim
+Personalizar textos| Sim| Sim
+Utilizar recursos padrão| Sim| Sim
+Enviar arquivos próprios| Não| Sim
+Biblioteca pessoal de arquivos| Não| Sim
+Personalizações adicionais| Básicas| Ampliadas
+Recursos avançados de criação| Limitados| Ampliados
+Benefícios para criadores| Básicos| Ampliados
+
+A assinatura deverá oferecer valor em três áreas principais:
+
+- criação/personalização;
+- armazenamento e utilização de mídia;
+- recursos para criadores.
+
+A quantidade de experiências criadas não será limitada por plano.
+
+---
+
+22. Arquivos próprios
+
+Usuários Premium poderão adicionar arquivos próprios aos padrões de mídia já suportados pela plataforma.
+
+Exemplos:
+
+- imagens;
+- músicas;
+- outros formatos que venham a ser suportados.
+
+Arquivos em formatos não suportados não serão aceitos simplesmente por o usuário possuir uma assinatura Premium.
+
+---
+
+23. Biblioteca pessoal de arquivos
+
+Os arquivos enviados poderão ser armazenados em uma biblioteca pessoal.
+
+O objetivo é evitar uploads repetidos.
+
+Usuário envia imagem.jpg
+        ↓
+Backend armazena o arquivo
+        ↓
+Imagem aparece na biblioteca
+        ↓
+Experiência A utiliza imagem.jpg
+Experiência B utiliza imagem.jpg
+Experiência C utiliza imagem.jpg
+
+As experiências deverão referenciar o arquivo armazenado em vez de criar cópias físicas desnecessárias.
+
+---
+
+24. Arquivos exclusivos de uma experiência
+
+O usuário também poderá enviar um arquivo diretamente para uma experiência sem necessariamente adicioná-lo à biblioteca pessoal.
+
+Assim existirão duas possibilidades:
+
+Arquivo da biblioteca
+
+Pode ser reutilizado em várias experiências.
+
+Arquivo exclusivo
+
+Pertence ao contexto daquela experiência e não precisa aparecer como recurso reutilizável na biblioteca.
+
+---
+
+25. Limites de armazenamento
+
+O armazenamento terá dois tipos de limite:
+
+Limite total
+
+Quantidade máxima de armazenamento disponível para a conta.
+
+Limite individual
+
+Tamanho máximo permitido para cada arquivo enviado.
+
+Os limites poderão variar conforme o plano.
+
+Também será possível estabelecer limites diferentes para tipos de mídia diferentes, como imagens e áudio.
+
+Os valores exatos ainda não foram definidos.
+
+---
+
+26. Exclusão inteligente de arquivos
+
+Um arquivo poderá ser removido da biblioteca sem necessariamente ser apagado imediatamente do armazenamento.
+
+Exemplo:
+
+imagem.jpg
+   │
+   ├── Experiência A
+   ├── Experiência B
+   └── Experiência C
+
+Se o usuário remover "imagem.jpg" da biblioteca:
+
+1. o arquivo deixa de aparecer na biblioteca;
+2. as experiências continuam funcionando;
+3. o backend mantém o arquivo enquanto houver referências;
+4. quando nenhuma experiência depender dele, o arquivo poderá ser removido definitivamente.
+
+Isso evita quebrar experiências existentes.
+
+---
+
+27. Relação entre arquivo e utilização
+
+O sistema deverá tratar o arquivo armazenado e seu uso em uma experiência como conceitos diferentes.
+
+Exemplo conceitual:
+
+{
+  experienceId: "exp-001",
+  media: [
+    {
+      fileId: "media-001",
+      usage: "cover"
+    }
+  ]
+}
+
+Nesse modelo, várias experiências podem utilizar o mesmo arquivo.
+
+O arquivo é armazenado uma vez, enquanto diferentes experiências mantêm referências a ele.
+
+---
+
+28. Relação entre template, experiência e mídia
+
+TEMPLATE
+   │
+   ├── estrutura
+   ├── regras
+   ├── aparência
+   └── componentes
+          │
+          ↓
+     CÓPIA DO USUÁRIO
+          │
+          ├── textos
+          ├── imagens
+          ├── música
+          ├── minigames
+          └── tema
+                  │
+                  ↓
+             EXPERIÊNCIA
+                  │
+                  ├── privada
+                  ├── compartilhada
+                  └── publicada
+
+Os arquivos de mídia ficam armazenados separadamente e podem ser referenciados por uma ou mais experiências.
+
+---
+
+29. Relação com o conceito original
+
+A primeira versão do projeto já existe.
+
+A segunda versão não será uma reconstrução completa do conceito original.
+
+Ela representa uma expansão do projeto existente para testar o conceito de plataforma.
+
+A principal mudança será adicionar:
+
+- 4 categorias;
+- 3 templates por categoria;
+- sistema de temas;
+- personalização;
+- minigames reutilizáveis;
+- biblioteca;
+- compartilhamento;
+- primeiros elementos da comunidade.
+
+A primeira versão existente continuará sendo uma referência para avaliar como o conceito evolui.
+
+---
+
+30. Segunda versão
+
+A segunda versão terá como objetivo principal experimentar o comportamento do conceito de plataforma.
+
+Não é necessário implementar imediatamente todo o sistema social, marketplace, pagamentos ou criação livre.
+
+A segunda versão deverá permitir observar:
+
+- quais categorias funcionam melhor;
+- quais templates são mais utilizados;
+- quais formas de personalização são mais interessantes;
+- como os usuários interagem com experiências;
+- quais experiências têm maior potencial de compartilhamento;
+- se os minigames são realmente utilizados;
+- como os temas alteram a percepção das experiências.
+
+---
+
+31. O que ainda não está definido
+
+As seguintes decisões continuam abertas:
+
+- nome definitivo da plataforma;
+- identidade visual definitiva;
+- nomes dos 12 templates;
+- estrutura detalhada de cada template;
+- regras detalhadas dos minigames;
+- sistema de criação de novos minigames;
+- sistema de criação de templates pela comunidade;
+- aprovação/moderação de templates comunitários;
+- regras de publicação;
+- regras de denúncia;
+- preços da assinatura;
+- comissão sobre templates vendidos;
+- métodos de pagamento;
+- política de reembolso;
+- limites exatos de armazenamento;
+- formatos de arquivo aceitos;
+- limites individuais de cada tipo de arquivo;
+- sistema de permissões colaborativas detalhado;
+- sistema de atualização de templates;
+- sistema de transferência de propriedade;
+- política de conteúdo;
+- política de direitos autorais;
+- arquitetura técnica;
+- banco de dados;
+- hospedagem;
+- sistema de autenticação;
+- infraestrutura de armazenamento;
+- sistema de notificações;
+- métricas e analytics.
+
+Esses pontos não devem ser tratados como decisões já tomadas.
+
+---
+
+32. Evolução futura
+
+Algumas possibilidades já foram consideradas para fases posteriores.
+
+Perfil
+
+- foto;
+- nome;
+- bio;
+- preferências;
+- experiências públicas;
+- templates publicados;
+- seguidores.
+
+Comunidade
+
+- descoberta de criadores;
+- templates comunitários;
+- experiências públicas;
+- favoritos;
+- curtidas;
+- seguidores.
+
+Marketplace
+
+- templates gratuitos;
+- templates pagos;
+- comissão para a plataforma;
+- remuneração dos criadores.
+
+Canvas
+
+Futuramente, a plataforma poderá oferecer um sistema de criação do zero, sem depender de um template rígido.
+
+Esse canvas poderá permitir:
+
+- elementos arrastáveis;
+- diferentes formatos;
+- páginas;
+- conexões entre páginas;
+- condições de desbloqueio;
+- minigames em posições livres;
+- transições;
+- animações;
+- maior liberdade de composição.
+
+O canvas não é requisito da segunda versão.
+
+---
+
+33. Princípios do produto
+
+Criação antes do consumo
+
+A plataforma é principalmente uma ferramenta para criar experiências.
+
+Personalização
+
+O usuário deve conseguir transformar um template em algo próprio.
+
+Templates reutilizáveis
+
+Um template pode servir de base para inúmeras criações independentes.
+
+Comunidade criadora
+
+Usuários também podem contribuir criando templates.
+
+Compartilhamento
+
+As experiências devem ser fáceis de compartilhar com outras pessoas.
+
+Liberdade sem editor completamente livre
+
+A plataforma oferece personalização sem exigir que o usuário monte toda a interface do zero.
+
+Criação básica acessível
+
+Criar e compartilhar experiências não devem ser os principais mecanismos de cobrança.
+
+Premium focado em personalização
+
+A assinatura deve principalmente ampliar a capacidade de personalização, mídia, armazenamento e recursos adicionais.
+
+Não ser uma rede social tradicional
+
+A plataforma terá descoberta e recursos sociais, mas não terá como objetivo principal conversas entre usuários.
+
+---
+
+34. Definição resumida
+
+«Uma plataforma de criação e compartilhamento de experiências interativas para entretenimento, na qual usuários podem utilizar templates oficiais ou criados pela comunidade, personalizá-los e compartilhar suas próprias experiências.»
+
+O modelo combina:
+
+Criação
+   +
+Templates
+   +
+Personalização
+   +
+Experiências interativas
+   +
+Compartilhamento
+   +
+Comunidade
+   +
+Marketplace
+
+A referência conceitual mais próxima é o modelo de criação e reutilização do Picrew, mas aplicado a experiências interativas em vez de somente imagens.
+
+---
+
+Status deste documento
+
+Fase: Conceito
+
+Versão: 0.1
+
+Objetivo: registrar a visão e as decisões iniciais do produto.
+
+Não é: PRD, especificação técnica ou arquitetura definitiva.
+
+As decisões futuras devem ser adicionadas conforme o conceito for validado através da segunda versão.

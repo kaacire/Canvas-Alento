@@ -1,0 +1,13 @@
+/* Diário romântico — base herdada do projeto original (papel, marrom, vinho, rosa, sálvia) */
+:root[data-theme="romantic-diary"] {
+  --bg: #f5ebdd;
+  --surface: #ebddc9;
+  --text: #4a362f;
+  --accent: #843f4c;
+  --accent-soft: #c9afa0;
+  --border: #795c54;
+  --border-width: 2.5px;
+  --radius: 12px;
+  --font-title: "Caveat", "Segoe Print", cursive;
+  --font-body: "Lora", Georgia, serif;
+}

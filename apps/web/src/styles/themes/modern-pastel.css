@@ -1,0 +1,13 @@
+/* Moderno com cores pastel */
+:root[data-theme="modern-pastel"] {
+  --bg: #fbf8ff;
+  --surface: #eee8fb;
+  --text: #34304a;
+  --accent: #7c6bd6;
+  --accent-soft: #bfe8dc;
+  --border: #d9d0f2;
+  --border-width: 1px;
+  --radius: 16px;
+  --font-title: "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}

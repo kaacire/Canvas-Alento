@@ -1,0 +1,16 @@
+{
+  "name": "hope-v2",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Plataforma de experiências interativas — segunda versão (arquivos base)",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev:api": "npm run dev -w @hope/api",
+    "dev:web": "npm run dev -w @hope/web",
+    "build": "npm run build -w @hope/shared && npm run build -w @hope/api && npm run build -w @hope/web",
+    "typecheck": "npm run typecheck -w @hope/shared && npm run typecheck -w @hope/api && npm run typecheck -w @hope/web",
+    "db:generate": "npm run db:generate -w @hope/api",
+    "db:migrate": "npm run db:migrate -w @hope/api"
+  },
+  "engines": { "node": ">=20" }
+}

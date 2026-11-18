@@ -1,0 +1,13 @@
+/* Rabisco — traço de lápis; o filtro SVG "rabisco" do projeto original pode ser reaproveitado */
+:root[data-theme="doodle"] {
+  --bg: #fffdf7;
+  --surface: #f6f1e4;
+  --text: #2d2d2d;
+  --accent: #3a5ba0;
+  --accent-soft: #f2c14e;
+  --border: #2d2d2d;
+  --border-width: 3px;
+  --radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --font-title: "Caveat", "Segoe Print", cursive;
+  --font-body: "Caveat", "Segoe Print", cursive;
+}
