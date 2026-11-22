@@ -8,14 +8,12 @@ export function HomePage() {
       <nav>
         <Link to="/templates">Explorar templates</Link>
         <Link to="/comunidade">Comunidade</Link>
-        <Link to="/biblioteca">Minha biblioteca</Link>
+        <Link to="/app/biblioteca">Minha biblioteca</Link>
+        <Link to="/planos">Ver planos</Link>
         <Link to="/entrar">Entrar</Link>
         <Link to="/cadastro">Criar conta</Link>
-
-        <Link to="/planos">Criar conta</Link>
-        <Link to="/app">Criar conta</Link>
+        <Link to="/app/criar">Criar experiência</Link>
       </nav>
     </section>
   );
 }
-

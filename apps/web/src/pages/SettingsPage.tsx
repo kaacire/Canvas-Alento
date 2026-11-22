@@ -1,12 +1,8 @@
-import { Link } from "react-router-dom";
-
-export function SettingsPage(){
-    return(
-        <aside>
-            <h2>Hope</h2>
-            <nav>
-                
-            </nav>
-        </aside>
-    )
+export function SettingsPage() {
+  return (
+    <section>
+      <h1>Configurações</h1>
+      <p>Conta, tema padrão e preferências.</p>
+    </section>
+  );
 }

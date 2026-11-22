@@ -1,12 +1,8 @@
-import { Link } from "react-router-dom";
-
-export function CreateExperiencePage(){
-    return(
-        <aside>
-            <h2>Hope</h2>
-            <nav>
-                
-            </nav>
-        </aside>
-    )
+export function CreateExperiencePage() {
+  return (
+    <section>
+      <h1>Criar experiência</h1>
+      <p>Categoria → template → cópia personalizável.</p>
+    </section>
+  );
 }

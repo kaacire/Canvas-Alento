@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export function MainNavigation() {
   return (
     <nav className="nav">
-      <Link to="/">Home</Link>
-      <Link to="/templates">Templates</Link>
-      <Link to="/comunidade">Community</Link>
-      <Link to="/biblioteca">Library</Link>
-      <Link to="/entrar">Login</Link>
-      <Link to="/cadastro">Register</Link>
+      <NavLink to="/" end>Início</NavLink>
+      <NavLink to="/templates">Templates</NavLink>
+      <NavLink to="/comunidade">Comunidade</NavLink>
+      <NavLink to="/planos">Planos</NavLink>
+      <NavLink to="/app">Minha área</NavLink>
+      <NavLink to="/entrar">Entrar</NavLink>
+      <NavLink to="/cadastro">Criar conta</NavLink>
     </nav>
   );
 }

@@ -1,12 +1,8 @@
-import { Link } from "react-router-dom";
-
-export function PlansPage(){
-    return(
-        <aside>
-            <h2>Hope</h2>
-            <nav>
-                
-            </nav>
-        </aside>
-    )
+export function PlansPage() {
+  return (
+    <section>
+      <h1>Planos</h1>
+      <p>Gratuito e Premium. Preços ainda não definidos.</p>
+    </section>
+  );
 }

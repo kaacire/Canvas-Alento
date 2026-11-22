@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-export function CreatorPage(){
-    return(
-        <aside>
-            <h2>Hope</h2>
-            <nav>
-                
-            </nav>
-        </aside>
-    )
+export function CreatorPage() {
+  const { username } = useParams<{ username: string }>();
+  return (
+    <section>
+      <h1>Criador</h1>
+      <p>Perfil público de @{username}: seguir e ver publicações.</p>
+    </section>
+  );
 }

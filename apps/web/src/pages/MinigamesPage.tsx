@@ -1,12 +1,8 @@
-import { Link } from "react-router-dom";
-
-export function MinigamesPage(){
-    return(
-        <aside>
-            <h2>Hope</h2>
-            <nav>
-                
-            </nav>
-        </aside>
-    )
+export function MinigamesPage() {
+  return (
+    <section>
+      <h1>Meus minigames</h1>
+      <p>Minigames salvos e reutilizáveis entre experiências.</p>
+    </section>
+  );
 }
