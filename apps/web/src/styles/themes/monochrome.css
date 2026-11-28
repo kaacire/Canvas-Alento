@@ -1,0 +1,30 @@
+/* Preto ou branco / monocromático (usar prefers-color-scheme ou escolha do usuário depois) */
+<<<<<<< HEAD
+[data-theme="monochrome"] {
+=======
+:root[data-theme="monochrome"] {
+>>>>>>> f43830495e56632532a39106561c090fc78554bb
+  --bg: #ffffff;
+  --surface: #f2f2f2;
+  --text: #111111;
+  --accent: #000000;
+  --accent-soft: #8a8a8a;
+  --border: #111111;
+  --border-width: 1px;
+  --radius: 2px;
+  --font-title: "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Helvetica Neue", Arial, sans-serif;
+<<<<<<< HEAD
+
+  /* Cores dos elementos do card (ícones, folha, texto do canvas) */
+  --art-sheet: #ffffff;
+  --art-paper: #d9d9d9;
+  --art-paper-dark: #a8a8a8;
+  --art-accent: #111111;
+  --art-leaf: #6b6b6b;
+  --art-line: #111111;
+  --art-ink: #111111;
+  --art-gold: #8a8a8a;
+=======
+>>>>>>> f43830495e56632532a39106561c090fc78554bb
+}

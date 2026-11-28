@@ -1,0 +1,24 @@
+/* Folha do card (editor e player) */
+.cs-sheet {
+  position: relative;
+  container-type: inline-size;
+  width: 100%;
+  background: var(--art-sheet);
+  color: var(--art-ink);
+  overflow: hidden;
+  border-radius: 4px;
+  font-family: var(--font-body);
+}
+.cs-el { position: absolute; transform-origin: center; user-select: none; }
+.cs-icon svg { display: block; }
+.cs-text { line-height: 1.2; white-space: pre-wrap; overflow-wrap: anywhere; }
+.cs-role-title { font-family: var(--font-title); font-weight: 700; line-height: 1.05; }
+.cs-role-body { font-family: var(--font-body); }
+.cs-role-note { font-family: var(--font-title); font-style: italic; opacity: 0.85; }
+.cs-color-ink { color: var(--art-ink); }
+.cs-color-accent { color: var(--art-accent); }
+.cs-color-soft { color: var(--art-paper-dark); }
+.cs-color-leaf { color: var(--art-leaf); }
+/* Rabisco: o filtro SVG #rabisco (definido uma vez em App) dá o tremido de lápis */
+[data-theme="doodle"] .cs-icon svg { filter: url(#rabisco); }
+.cs-el.bare { position: static; }

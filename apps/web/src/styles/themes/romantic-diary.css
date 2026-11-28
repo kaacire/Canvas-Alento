@@ -1,0 +1,30 @@
+/* Diário romântico — base herdada do projeto original (papel, marrom, vinho, rosa, sálvia) */
+<<<<<<< HEAD
+[data-theme="romantic-diary"] {
+=======
+:root[data-theme="romantic-diary"] {
+>>>>>>> f43830495e56632532a39106561c090fc78554bb
+  --bg: #f5ebdd;
+  --surface: #ebddc9;
+  --text: #4a362f;
+  --accent: #843f4c;
+  --accent-soft: #c9afa0;
+  --border: #795c54;
+  --border-width: 2.5px;
+  --radius: 12px;
+  --font-title: "Caveat", "Segoe Print", cursive;
+  --font-body: "Lora", Georgia, serif;
+<<<<<<< HEAD
+
+  /* Cores dos elementos do card (ícones, folha, texto do canvas) */
+  --art-sheet: #f7efe2;
+  --art-paper: #b9a396;
+  --art-paper-dark: #9c8579;
+  --art-accent: #843f4c;
+  --art-leaf: #7a8b63;
+  --art-line: #795c54;
+  --art-ink: #4a362f;
+  --art-gold: #d9b36a;
+=======
+>>>>>>> f43830495e56632532a39106561c090fc78554bb
+}

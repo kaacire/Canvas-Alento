@@ -1,0 +1,321 @@
+// Modelo de dados BASE — derivado do conceito v0.1 (ver docs/arquitetura-base.md).
+// Proposta inicial: banco, hospedagem e autenticação ainda estão em aberto.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- Enums ----------
+
+enum Category {
+  RELATIONSHIP_LETTERS
+  CHALLENGES
+  FLASHCARDS
+  QUIZ
+}
+
+enum ThemeKey {
+  ROMANTIC_DIARY
+  MONOCHROME
+  DOODLE
+  MODERN_PASTEL
+}
+
+enum TemplateOrigin {
+  PLATFORM
+  COMMUNITY
+}
+
+enum Visibility {
+  PRIVATE
+  LINK
+  PUBLISHED
+}
+
+enum AccessMode {
+  OPEN
+  LOGIN_REQUIRED
+}
+
+enum CollaboratorRole {
+  FULL_EDIT
+  LIMITED_EDIT
+}
+
+enum Plan {
+  FREE
+  PREMIUM
+}
+
+enum MediaKind {
+  IMAGE
+  AUDIO
+}
+
+enum MinigameType {
+  MAZE
+  PUZZLE
+  MEMORY
+  SECRET_CODE
+  SEQUENCE
+  ASSOCIATION
+  HIDDEN_WORD
+  RIDDLE
+  DRAG_AND_DROP
+  SPOT_THE_DIFFERENCE
+}
+
+enum SocialTarget {
+  EXPERIENCE
+  TEMPLATE
+}
+
+// ---------- Usuários e assinatura ----------
+
+model User {
+  id          String   @id @default(uuid()) @db.Uuid
+  email       String   @unique
+  name        String
+  authId      String?  @unique // id num provedor externo, se um dia for adotado
+  /// Identificador público (/criadores/:username). Nulo só em contas antigas.
+  username    String?  @unique
+  bio         String?
+  avatarUrl   String?
+  /// Hash scrypt da senha. Nulo se a conta usar provedor externo (authId).
+  passwordHash      String?
+  /// Tokens emitidos antes deste instante deixam de valer (troca de senha).
+  passwordChangedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  subscription  Subscription?
+  templates     Template[]
+  experiences   Experience[]
+  collaborations ExperienceCollaborator[]
+  minigames     Minigame[]
+  mediaFiles    MediaFile[]
+  licenses      TemplateLicense[]
+  likes         Like[]
+  favorites     Favorite[]
+  following     Follow[]         @relation("Follower")
+  followers     Follow[]         @relation("Followed")
+  progress      ParticipantProgress[]
+}
+
+model Subscription {
+  id         String    @id @default(uuid()) @db.Uuid
+  userId     String    @unique @db.Uuid
+  plan       Plan      @default(FREE)
+  status     String    @default("ACTIVE")
+  providerId String? // provedor de pagamento (a definir)
+  startedAt  DateTime  @default(now())
+  expiresAt  DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ---------- Templates ----------
+
+model Template {
+  id           String         @id @default(uuid()) @db.Uuid
+  ownerId      String?        @db.Uuid // null = template da plataforma
+  origin       TemplateOrigin @default(PLATFORM)
+  category     Category
+  title        String
+  description  String?
+  structure    Json // TemplateStructure (shared)
+  defaultTheme ThemeKey       @default(ROMANTIC_DIARY)
+  priceCents   Int? // null = gratuito
+  published    Boolean        @default(false)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  owner       User?             @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  experiences Experience[]
+  licenses    TemplateLicense[]
+  mediaUsages MediaUsage[]
+
+  @@index([category, published])
+}
+
+/// Compra = licença de uso, não transferência de propriedade (seções 18–19).
+model TemplateLicense {
+  id         String   @id @default(uuid()) @db.Uuid
+  userId     String   @db.Uuid
+  templateId String   @db.Uuid
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  template Template @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, templateId])
+}
+
+// ---------- Experiências (cópias independentes) ----------
+
+model Experience {
+  id               String     @id @default(uuid()) @db.Uuid
+  ownerId          String     @db.Uuid
+  sourceTemplateId String?   @db.Uuid // origem; a cópia NÃO altera o template
+  category         Category
+  title            String
+  slug             String?    @unique // definido ao compartilhar/publicar
+  content          Json // ExperienceContent: cópia independente do template
+  theme            ThemeKey   @default(ROMANTIC_DIARY)
+  musicFileId      String?    @db.Uuid
+  visibility       Visibility @default(PRIVATE)
+  accessMode       AccessMode @default(OPEN)
+  isDraft          Boolean    @default(true)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  owner          User                     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  sourceTemplate Template?                @relation(fields: [sourceTemplateId], references: [id], onDelete: SetNull)
+  musicFile      MediaFile?               @relation("ExperienceMusic", fields: [musicFileId], references: [id], onDelete: SetNull)
+  collaborators  ExperienceCollaborator[]
+  minigames      ExperienceMinigame[]
+  mediaUsages    MediaUsage[]
+  progress       ParticipantProgress[]
+
+  @@index([ownerId])
+  @@index([visibility])
+}
+
+model ExperienceCollaborator {
+  id           String           @id @default(uuid()) @db.Uuid
+  experienceId String           @db.Uuid
+  userId       String           @db.Uuid
+  role         CollaboratorRole @default(LIMITED_EDIT)
+  permissions  Json // lista de permissões; detalhamento em aberto
+  createdAt    DateTime         @default(now())
+
+  experience Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([experienceId, userId])
+}
+
+// ---------- Minigames (recursos independentes e reutilizáveis) ----------
+
+model Minigame {
+  id        String       @id @default(uuid()) @db.Uuid
+  ownerId   String?      @db.Uuid // null = minigame da plataforma
+  type      MinigameType
+  title     String
+  config    Json
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  owner       User?                @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  experiences ExperienceMinigame[]
+}
+
+model ExperienceMinigame {
+  id             String  @id @default(uuid()) @db.Uuid
+  experienceId   String  @db.Uuid
+  minigameId     String  @db.Uuid
+  position       Int
+  configOverride Json?
+
+  experience Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  minigame   Minigame   @relation(fields: [minigameId], references: [id], onDelete: Restrict)
+
+  @@unique([experienceId, position])
+}
+
+// ---------- Arquivos: armazenados uma vez, usados por referência ----------
+
+model MediaFile {
+  id           String    @id @default(uuid()) @db.Uuid
+  ownerId      String    @db.Uuid
+  kind         MediaKind
+  storageKey   String    @unique // chave no storage (infraestrutura a definir)
+  mimeType     String
+  sizeBytes    Int
+  originalName String
+  /// true = aparece na biblioteca pessoal (reutilizável); false = exclusivo de uma experiência
+  inLibrary    Boolean   @default(false)
+  /// Exclusão inteligente: removido da biblioteca, mas mantido enquanto houver usos.
+  removedFromLibraryAt DateTime?
+  createdAt    DateTime  @default(now())
+
+  owner       User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  usages      MediaUsage[]
+  musicOf     Experience[] @relation("ExperienceMusic")
+
+  @@index([ownerId, inLibrary])
+}
+
+/// Relação entre arquivo e utilização (seção 27): ex. { fileId, usage: "cover" }.
+model MediaUsage {
+  id           String  @id @default(uuid()) @db.Uuid
+  fileId       String  @db.Uuid
+  experienceId String? @db.Uuid
+  templateId   String? @db.Uuid
+  usage        String
+
+  file       MediaFile   @relation(fields: [fileId], references: [id], onDelete: Restrict)
+  experience Experience? @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  template   Template?   @relation(fields: [templateId], references: [id], onDelete: Cascade)
+
+  @@index([fileId])
+}
+
+// ---------- Progresso do participante ----------
+// As respostas pertencem ao participante: não há acesso do criador (seção 14).
+
+model ParticipantProgress {
+  id           String   @id @default(uuid()) @db.Uuid
+  experienceId String   @db.Uuid
+  userId       String   @db.Uuid // participantes sem conta: progresso no navegador
+  state        Json // ProgressState (shared)
+  updatedAt    DateTime @updatedAt
+
+  experience Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([experienceId, userId])
+}
+
+// ---------- Recursos sociais (sem comentários/chat inicialmente) ----------
+
+model Like {
+  id         String       @id @default(uuid()) @db.Uuid
+  userId     String       @db.Uuid
+  targetType SocialTarget
+  targetId   String       @db.Uuid
+  createdAt  DateTime     @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, targetType, targetId])
+}
+
+model Favorite {
+  id         String       @id @default(uuid()) @db.Uuid
+  userId     String       @db.Uuid
+  targetType SocialTarget
+  targetId   String       @db.Uuid
+  createdAt  DateTime     @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, targetType, targetId])
+}
+
+model Follow {
+  id         String   @id @default(uuid()) @db.Uuid
+  followerId String   @db.Uuid
+  followedId String   @db.Uuid
+  createdAt  DateTime @default(now())
+
+  follower User @relation("Follower", fields: [followerId], references: [id], onDelete: Cascade)
+  followed User @relation("Followed", fields: [followedId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followedId])
+}

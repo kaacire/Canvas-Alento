@@ -1,0 +1,30 @@
+/* Rabisco — traço de lápis; o filtro SVG "rabisco" do projeto original pode ser reaproveitado */
+<<<<<<< HEAD
+[data-theme="doodle"] {
+=======
+:root[data-theme="doodle"] {
+>>>>>>> f43830495e56632532a39106561c090fc78554bb
+  --bg: #fffdf7;
+  --surface: #f6f1e4;
+  --text: #2d2d2d;
+  --accent: #3a5ba0;
+  --accent-soft: #f2c14e;
+  --border: #2d2d2d;
+  --border-width: 3px;
+  --radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --font-title: "Caveat", "Segoe Print", cursive;
+  --font-body: "Caveat", "Segoe Print", cursive;
+<<<<<<< HEAD
+
+  /* Cores dos elementos do card (ícones, folha, texto do canvas) */
+  --art-sheet: #fffdf7;
+  --art-paper: #f6e7a8;
+  --art-paper-dark: #e4cf7c;
+  --art-accent: #d9534f;
+  --art-leaf: #5fa36a;
+  --art-line: #2d2d2d;
+  --art-ink: #2d2d2d;
+  --art-gold: #f2c14e;
+=======
+>>>>>>> f43830495e56632532a39106561c090fc78554bb
+}

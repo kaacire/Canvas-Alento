@@ -1,0 +1,30 @@
+/* Moderno com cores pastel */
+<<<<<<< HEAD
+[data-theme="modern-pastel"] {
+=======
+:root[data-theme="modern-pastel"] {
+>>>>>>> f43830495e56632532a39106561c090fc78554bb
+  --bg: #fbf8ff;
+  --surface: #eee8fb;
+  --text: #34304a;
+  --accent: #7c6bd6;
+  --accent-soft: #bfe8dc;
+  --border: #d9d0f2;
+  --border-width: 1px;
+  --radius: 16px;
+  --font-title: "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+<<<<<<< HEAD
+
+  /* Cores dos elementos do card (ícones, folha, texto do canvas) */
+  --art-sheet: #fbf8ff;
+  --art-paper: #dcd3f5;
+  --art-paper-dark: #bfb3e6;
+  --art-accent: #e88fb0;
+  --art-leaf: #7cc9b0;
+  --art-line: #7c6bd6;
+  --art-ink: #34304a;
+  --art-gold: #f5d78e;
+=======
+>>>>>>> f43830495e56632532a39106561c090fc78554bb
+}

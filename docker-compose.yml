@@ -1,0 +1,17 @@
+# PostgreSQL local para desenvolvimento (opcional, se você não tem Postgres instalado).
+# Uso:  docker compose up -d
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hope_v2
+    ports:
+      - "5432:5432"
+    volumes:
+      - hope_v2_data:/var/lib/postgresql/data
+
+volumes:
+  hope_v2_data:

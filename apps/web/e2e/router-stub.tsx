@@ -1,0 +1,11 @@
+import * as React from "react";
+export const useParams = () => ((window as any).__params ?? {});
+export const useNavigate = () => (to: string) => { ((window as any).__nav ||= []).push(to); };
+export const useLocation = () => ({ pathname: "/", state: null });
+export const Link = ({ to, children, ...r }: any) => <a href={to} {...r}>{children}</a>;
+export const NavLink = Link;
+export const Navigate = () => null;
+export const Outlet = () => null;
+export const Routes = ({ children }: any) => children;
+export const Route = () => null;
+export const BrowserRouter = ({ children }: any) => children;
